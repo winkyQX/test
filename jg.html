@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smarts Hôtel - Experience Smart Luxury</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark: #0a0a0a;
+            --dark-gray: #1a1a1a;
+            --medium-gray: #2a2a2a;
+            --light-gray: #3a3a3a;
+            --gold: #d4af37;
+            --light-gold: #f4e4a6;
+            --beige: #f5f1e8;
+            --white: #f9f9f9;
+            --transition: all 0.3s ease;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--white);
+            background-color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        body.rtl {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        body.rtl h1, 
+        body.rtl h2, 
+        body.rtl h3, 
+        body.rtl h4, 
+        body.rtl h5 {
+            font-family: 'Cairo', serif;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            gap: 10px;
+        }
+
+        body.rtl .language-switcher {
+            right: auto;
+            left: 20px;
+        }
+
+        .lang-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(10, 10, 10, 0.7);
+            color: var(--white);
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background-color: var(--gold);
+            color: var(--dark);
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        body.rtl .logo {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .logo span {
+            color: var(--white);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        body.rtl .nav-links {
+            margin-right: auto;
+            margin-left: 0;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        body.rtl .nav-links li {
+            margin-left: 0;
+            margin-right: 30px;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--gold);
+            transition: var(--transition);
+        }
+
+        body.rtl .nav-links a::after {
+            left: auto;
+            right: 0;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            transform: scale(1.1);
+            animation: zoomEffect 20s infinite alternate;
+        }
+
+        @keyframes zoomEffect {
+            0% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: var(--beige);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 0.8s;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s forwards 1s;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--gold);
+            color: var(--dark);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--light-gold);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Section Common Styles */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: var(--beige);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            align-items: center;
+        }
+
+        body.rtl .about-content {
+            direction: rtl;
+        }
+
+        .about-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--beige);
+        }
+
+        .about-features {
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        body.rtl .feature {
+            direction: rtl;
+        }
+
+        .feature i {
+            color: var(--gold);
+            font-size: 1.5rem;
+        }
+
+        .about-image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transform: perspective(1000px) rotateY(-10deg);
+            transition: var(--transition);
+        }
+
+        body.rtl .about-image {
+            transform: perspective(1000px) rotateY(10deg);
+        }
+
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(0);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Rooms Section */
+        .rooms-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .room-card {
+            background-color: var(--dark-gray);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .room-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .room-card:hover .room-image img {
+            transform: scale(1.05);
+        }
+
+        .room-info {
+            padding: 25px;
+        }
+
+        .room-info h3 {
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .room-price {
+            font-size: 1.5rem;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .room-features {
+            margin-bottom: 20px;
+        }
+
+        .room-features span {
+            display: inline-block;
+            background-color: var(--medium-gray);
+            color: var(--beige);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        body.rtl .room-features span {
+            margin-right: 0;
+            margin-left: 8px;
+        }
+
+        /* Services Section */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--dark-gray);
+            padding: 40px 25px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            background-color: var(--medium-gray);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(212, 175, 55, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: var(--gold);
+            font-size: 2rem;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-icon {
+            background-color: rgba(212, 175, 55, 0.2);
+            transform: scale(1.1);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+
+        /* Gallery Section */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 250px;
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(212, 175, 55, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Contact Section */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+        }
+
+        body.rtl .contact-container {
+            direction: rtl;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        body.rtl .contact-detail {
+            direction: rtl;
+        }
+
+        .contact-detail i {
+            color: var(--gold);
+            font-size: 1.2rem;
+            width: 40px;
+        }
+
+        body.rtl .contact-detail i {
+            margin-left: 10px;
+            margin-right: 0;
+        }
+
+        .map-container {
+            height: 300px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            margin-top: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: var(--dark-gray);
+            border: 1px solid var(--light-gray);
+            border-radius: var(--radius);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body.rtl .contact-form input,
+        body.rtl .contact-form textarea {
+            font-family: 'Cairo', sans-serif;
+            text-align: right;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            padding: 70px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        body.rtl .footer-content {
+            direction: rtl;
+        }
+
+        .footer-col h4 {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 25px;
+        }
+
+        .footer-links li {
+            list-style: none;
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--beige);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+
+        body.rtl .footer-links a:hover {
+            padding-left: 0;
+            padding-right: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background-color: var(--medium-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--gold);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--light-gray);
+            color: var(--beige);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .rooms-container,
+            .services-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .language-switcher {
+                top: 15px;
+                right: 15px;
+            }
+            
+            body.rtl .language-switcher {
+                right: auto;
+                left: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0 15px;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: var(--transition);
+            }
+            
+            body.rtl .nav-links {
+                left: auto;
+                right: 0;
+            }
+            
+            .nav-links.active {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                transform: none;
+            }
+            
+            body.rtl .about-image {
+                transform: none;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .rooms-container,
+            .services-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-container {
+                grid-template-columns: 1fr;
+                grid-auto-rows: 200px;
+            }
+            
+            .gallery-item:nth-child(1),
+            .gallery-item:nth-child(4) {
+                grid-column: span 1;
+            }
+            
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 70px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .language-switcher {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="ar">AR</button>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Smarts<span>Hôtel</span></a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home" data-key="nav.home">Home</a></li>
+                    <li><a href="#about" data-key="nav.about">About</a></li>
+                    <li><a href="#rooms" data-key="nav.rooms">Rooms & Suites</a></li>
+                    <li><a href="#services" data-key="nav.services">Services</a></li>
+                    <li><a href="#gallery" data-key="nav.gallery">Gallery</a></li>
+                    <li><a href="#contact" data-key="nav.contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 data-key="hero.title">Experience Smart Luxury at Smarts Hôtel</h1>
+            <p data-key="hero.subtitle">Where modern technology meets timeless elegance in the heart of the city</p>
+            <div class="cta-buttons">
+                <a href="#rooms" class="btn btn-primary" data-key="hero.book">Book Now</a>
+                <a href="#about" class="btn btn-secondary" data-key="hero.explore">Explore Rooms</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="about.title">About Smarts Hôtel</h2>
+                <p data-key="about.subtitle">Discover the story behind our commitment to luxury, comfort, and innovation</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3 data-key="about.heading">Redefining Luxury Hospitality</h3>
+                    <p data-key="about.text1">Established in 2010, Smarts Hôtel has become a beacon of modern luxury in the city. We combine elegant design with cutting-edge technology to create an unparalleled guest experience.</p>
+                    <p data-key="about.text2">Our philosophy centers around personalized service, intuitive smart room features, and attention to every detail that makes your stay exceptional.</p>
+                    <div class="about-features">
+                        <div class="feature">
+                            <i class="fas fa-shield-alt"></i>
+                            <span data-key="about.feature1">Premium Security & Privacy</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-concierge-bell"></i>
+                            <span data-key="about.feature2">24/7 Concierge Service</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i>
+                            <span data-key="about.feature3">High-Speed Connectivity</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-spa"></i>
+                            <span data-key="about.feature4">Luxury Wellness Facilities</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Hotel Lobby">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" style="background-color: var(--dark-gray);">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="rooms.title">Rooms & Suites</h2>
+                <p data-key="rooms.subtitle">Choose from our carefully designed accommodations, each blending comfort with smart technology</p>
+            </div>
+            <div class="rooms-container">
+                <!-- Room 1 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Standard Room">
+                    </div>
+                    <div class="room-info">
+                        <h3 data-key="rooms.standard">Standard Room</h3>
+                        <div class="room-price">$299 <span data-key="rooms.night">/ night</span></div>
+                        <div class="room-features">
+                            <span data-key="rooms.feat1">Smart Controls</span>
+                            <span data-key="rooms.feat2">King Bed</span>
+                            <span data-key="rooms.feat3">City View</span>
+                            <span data-key="rooms.feat4">Work Desk</span>
+                        </div>
+                        <a href="#contact" class="btn btn-primary" data-key="rooms.book">Book Now</a>
+                    </div>
+                </div>
+                
+                <!-- Room 2 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1158&q=80" alt="Deluxe Room">
+                    </div>
+                    <div class="room-info">
+                        <h3 data-key="rooms.deluxe">Deluxe Room</h3>
+                        <div class="room-price">$459 <span data-key="rooms.night">/ night</span></div>
+                        <div class="room-features">
+                            <span data-key="rooms.feat1">Smart Controls</span>
+                            <span data-key="rooms.feat5">Premium View</span>
+                            <span data-key="rooms.feat6">Spa Bath</span>
+                            <span data-key="rooms.feat7">Lounge Area</span>
+                        </div>
+                        <a href="#contact" class="btn btn-primary" data-key="rooms.book">Book Now</a>
+                    </div>
+                </div>
+                
+                <!-- Room 3 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Executive Suite">
+                    </div>
+                    <div class="room-info">
+                        <h3 data-key="rooms.suite">Executive Suite</h3>
+                        <div class="room-price">$699 <span data-key="rooms.night">/ night</span></div>
+                        <div class="room-features">
+                            <span data-key="rooms.feat8">Full Smart Home</span>
+                            <span data-key="rooms.feat9">Panoramic View</span>
+                            <span data-key="rooms.feat10">Private Bar</span>
+                            <span data-key="rooms.feat11">Butler Service</span>
+                        </div>
+                        <a href="#contact" class="btn btn-primary" data-key="rooms.book">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="services.title">Services & Amenities</h2>
+                <p data-key="services.subtitle">Experience our comprehensive range of luxury services designed for your comfort and convenience</p>
+            </div>
+            <div class="services-container">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3 data-key="services.service1">High-Speed Wi-Fi</h3>
+                    <p data-key="services.desc1">Complimentary ultra-fast fiber optic internet throughout the hotel and in all rooms.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 data-key="services.service2">Smart Rooms</h3>
+                    <p data-key="services.desc2">Voice-controlled rooms with automated lighting, temperature, and entertainment systems.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3 data-key="services.service3">Luxury Spa</h3>
+                    <p data-key="services.desc3">Rejuvenate in our award-winning spa with treatments using premium organic products.</p>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 data-key="services.service4">Gourmet Restaurant</h3>
+                    <p data-key="services.desc4">Experience culinary excellence at our in-house restaurant with Michelin-starred chefs.</p>
+                </div>
+                
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3 data-key="services.service5">Fitness Center</h3>
+                    <p data-key="services.desc5">State-of-the-art gym with personal trainers and wellness classes available.</p>
+                </div>
+                
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3 data-key="services.service6">Infinity Pool</h3>
+                    <p data-key="services.desc6">Stunning rooftop infinity pool with panoramic city views and poolside service.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" style="background-color: var(--dark-gray);">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="gallery.title">Gallery</h2>
+                <p data-key="gallery.subtitle">Explore the elegant spaces and luxurious amenities of Smarts Hôtel</p>
+            </div>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Hotel Exterior">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus fa-2x"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1160&q=80" alt="Restaurant">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Spa">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1564501049418-3c27787d01e8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1158&q=80" alt="Pool">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus fa-2x"></i>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Lobby">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1596436889106-be35e843f974?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Gym">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2 data-key="contact.title">Contact Us</h2>
+                <p data-key="contact.subtitle">Get in touch with our team for reservations, inquiries, or special requests</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3 data-key="contact.getintouch">Get In Touch</h3>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4 data-key="contact.address">Address</h4>
+                                <p>123 Luxury Avenue, City Center, 10001</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4 data-key="contact.phone">Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4 data-key="contact.email">Email</h4>
+                                <p>reservations@smartshotel.com</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.177858804427!2d-73.98784468459418!3d40.70555197933205!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a315cdf4c9b%3A0x8b934de5cae6f7a!2sLuxury%20Avenue%2C%20New%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2s!4v1629999400000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <input type="text" data-key="contact.form.name" placeholder="Your Name" required>
+                        <input type="email" data-key="contact.form.email" placeholder="Your Email" required>
+                        <textarea rows="5" data-key="contact.form.message" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn btn-primary" data-key="contact.form.send">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4 data-key="footer.hotel">Smarts Hôtel</h4>
+                    <p data-key="footer.description">Experience the perfect blend of luxury and technology in the heart of the city.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4 data-key="footer.links">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home" data-key="nav.home">Home</a></li>
+                        <li><a href="#about" data-key="nav.about">About Us</a></li>
+                        <li><a href="#rooms" data-key="nav.rooms">Rooms & Suites</a></li>
+                        <li><a href="#services" data-key="nav.services">Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-key="footer.services">Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services" data-key="services.service2">Smart Rooms</a></li>
+                        <li><a href="#services" data-key="services.service3">Spa & Wellness</a></li>
+                        <li><a href="#services" data-key="services.service4">Fine Dining</a></li>
+                        <li><a href="#services" data-key="footer.events">Event Spaces</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 data-key="contact.title">Contact Info</h4>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> <span data-key="contact.address">Address</span>: 123 Luxury Avenue</li>
+                        <li><i class="fas fa-phone"></i> <span data-key="contact.phone">Phone</span>: +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> <span data-key="contact.email">Email</span>: info@smartshotel.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p data-key="footer.copyright">&copy; 2023 Smarts Hôtel. All rights reserved. | Designed with luxury in mind</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Translation data for all languages
+        const translations = {
+            en: {
+                // Navigation
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.rooms": "Rooms & Suites",
+                "nav.services": "Services",
+                "nav.gallery": "Gallery",
+                "nav.contact": "Contact",
+                
+                // Hero Section
+                "hero.title": "Experience Smart Luxury at Smarts Hôtel",
+                "hero.subtitle": "Where modern technology meets timeless elegance in the heart of the city",
+                "hero.book": "Book Now",
+                "hero.explore": "Explore Rooms",
+                
+                // About Section
+                "about.title": "About Smarts Hôtel",
+                "about.subtitle": "Discover the story behind our commitment to luxury, comfort, and innovation",
+                "about.heading": "Redefining Luxury Hospitality",
+                "about.text1": "Established in 2010, Smarts Hôtel has become a beacon of modern luxury in the city. We combine elegant design with cutting-edge technology to create an unparalleled guest experience.",
+                "about.text2": "Our philosophy centers around personalized service, intuitive smart room features, and attention to every detail that makes your stay exceptional.",
+                "about.feature1": "Premium Security & Privacy",
+                "about.feature2": "24/7 Concierge Service",
+                "about.feature3": "High-Speed Connectivity",
+                "about.feature4": "Luxury Wellness Facilities",
+                
+                // Rooms Section
+                "rooms.title": "Rooms & Suites",
+                "rooms.subtitle": "Choose from our carefully designed accommodations, each blending comfort with smart technology",
+                "rooms.standard": "Standard Room",
+                "rooms.deluxe": "Deluxe Room",
+                "rooms.suite": "Executive Suite",
+                "rooms.night": "/ night",
+                "rooms.feat1": "Smart Controls",
+                "rooms.feat2": "King Bed",
+                "rooms.feat3": "City View",
+                "rooms.feat4": "Work Desk",
+                "rooms.feat5": "Premium View",
+                "rooms.feat6": "Spa Bath",
+                "rooms.feat7": "Lounge Area",
+                "rooms.feat8": "Full Smart Home",
+                "rooms.feat9": "Panoramic View",
+                "rooms.feat10": "Private Bar",
+                "rooms.feat11": "Butler Service",
+                "rooms.book": "Book Now",
+                
+                // Services Section
+                "services.title": "Services & Amenities",
+                "services.subtitle": "Experience our comprehensive range of luxury services designed for your comfort and convenience",
+                "services.service1": "High-Speed Wi-Fi",
+                "services.desc1": "Complimentary ultra-fast fiber optic internet throughout the hotel and in all rooms.",
+                "services.service2": "Smart Rooms",
+                "services.desc2": "Voice-controlled rooms with automated lighting, temperature, and entertainment systems.",
+                "services.service3": "Luxury Spa",
+                "services.desc3": "Rejuvenate in our award-winning spa with treatments using premium organic products.",
+                "services.service4": "Gourmet Restaurant",
+                "services.desc4": "Experience culinary excellence at our in-house restaurant with Michelin-starred chefs.",
+                "services.service5": "Fitness Center",
+                "services.desc5": "State-of-the-art gym with personal trainers and wellness classes available.",
+                "services.service6": "Infinity Pool",
+                "services.desc6": "Stunning rooftop infinity pool with panoramic city views and poolside service.",
+                
+                // Gallery Section
+                "gallery.title": "Gallery",
+                "gallery.subtitle": "Explore the elegant spaces and luxurious amenities of Smarts Hôtel",
+                
+                // Contact Section
+                "contact.title": "Contact Us",
+                "contact.subtitle": "Get in touch with our team for reservations, inquiries, or special requests",
+                "contact.getintouch": "Get In Touch",
+                "contact.address": "Address",
+                "contact.phone": "Phone",
+                "contact.email": "Email",
+                "contact.form.name": "Your Name",
+                "contact.form.email": "Your Email",
+                "contact.form.message": "Your Message",
+                "contact.form.send": "Send Message",
+                
+                // Footer
+                "footer.hotel": "Smarts Hôtel",
+                "footer.description": "Experience the perfect blend of luxury and technology in the heart of the city.",
+                "footer.links": "Quick Links",
+                "footer.services": "Services",
+                "footer.events": "Event Spaces",
+                "footer.copyright": "© 2023 Smarts Hôtel. All rights reserved. | Designed with luxury in mind"
+            },
+            
+            fr: {
+                // Navigation
+                "nav.home": "Accueil",
+                "nav.about": "À Propos",
+                "nav.rooms": "Chambres & Suites",
+                "nav.services": "Services",
+                "nav.gallery": "Galerie",
+                "nav.contact": "Contact",
+                
+                // Hero Section
+                "hero.title": "Vivez le Luxe Intelligent à l'Hôtel Smarts",
+                "hero.subtitle": "Où la technologie moderne rencontre l'élégance intemporelle au cœur de la ville",
+                "hero.book": "Réserver",
+                "hero.explore": "Explorer les Chambres",
+                
+                // About Section
+                "about.title": "À Propos de Smarts Hôtel",
+                "about.subtitle": "Découvrez l'histoire derrière notre engagement envers le luxe, le confort et l'innovation",
+                "about.heading": "Redéfinir l'Hospitalité de Luxe",
+                "about.text1": "Fondé en 2010, Smarts Hôtel est devenu un phare du luxe moderne en ville. Nous combinons un design élégant avec une technologie de pointe pour créer une expérience client inégalée.",
+                "about.text2": "Notre philosophie repose sur un service personnalisé, des fonctionnalités de chambres intelligentes intuitives et une attention à chaque détail qui rend votre séjour exceptionnel.",
+                "about.feature1": "Sécurité et Confidentialité Premium",
+                "about.feature2": "Service Concierge 24h/24",
+                "about.feature3": "Connectivité Haut Débit",
+                "about.feature4": "Installations de Bien-être Luxueuses",
+                
+                // Rooms Section
+                "rooms.title": "Chambres & Suites",
+                "rooms.subtitle": "Choisissez parmi nos hébergements soigneusement conçus, alliant chacun confort et technologie intelligente",
+                "rooms.standard": "Chambre Standard",
+                "rooms.deluxe": "Chambre Deluxe",
+                "rooms.suite": "Suite Exécutive",
+                "rooms.night": "/ nuit",
+                "rooms.feat1": "Contrôles Intelligents",
+                "rooms.feat2": "Lit King Size",
+                "rooms.feat3": "Vue sur la Ville",
+                "rooms.feat4": "Bureau de Travail",
+                "rooms.feat5": "Vue Premium",
+                "rooms.feat6": "Bain Spa",
+                "rooms.feat7": "Espace Salon",
+                "rooms.feat8": "Maison Intelligente Complète",
+                "rooms.feat9": "Vue Panoramique",
+                "rooms.feat10": "Bar Privé",
+                "rooms.feat11": "Service de Majordome",
+                "rooms.book": "Réserver",
+                
+                // Services Section
+                "services.title": "Services & Équipements",
+                "services.subtitle": "Découvrez notre gamme complète de services de luxe conçus pour votre confort et commodité",
+                "services.service1": "Wi-Fi Haut Débit",
+                "services.desc1": "Internet fibre optique ultra-rapide gratuit dans tout l'hôtel et dans toutes les chambres.",
+                "services.service2": "Chambres Intelligentes",
+                "services.desc2": "Chambres contrôlées par commande vocale avec systèmes automatisés d'éclairage, de température et de divertissement.",
+                "services.service3": "Spa de Luxe",
+                "services.desc3": "Régénérez-vous dans notre spa primé avec des traitements utilisant des produits organiques premium.",
+                "services.service4": "Restaurant Gastronomique",
+                "services.desc4": "Vivez l'excellence culinaire dans notre restaurant interne avec des chefs étoilés Michelin.",
+                "services.service5": "Centre de Fitness",
+                "services.desc5": "Salle de sport ultramoderne avec entraîneurs personnels et cours de bien-être disponibles.",
+                "services.service6": "Piscine à Débordement",
+                "services.desc6": "Magnifique piscine à débordement sur le toit avec vue panoramique sur la ville et service au bord de la piscine.",
+                
+                // Gallery Section
+                "gallery.title": "Galerie",
+                "gallery.subtitle": "Explorez les espaces élégants et les équipements luxueux de Smarts Hôtel",
+                
+                // Contact Section
+                "contact.title": "Contactez-Nous",
+                "contact.subtitle": "Contactez notre équipe pour des réservations, demandes de renseignements ou demandes spéciales",
+                "contact.getintouch": "Entrer en Contact",
+                "contact.address": "Adresse",
+                "contact.phone": "Téléphone",
+                "contact.email": "Email",
+                "contact.form.name": "Votre Nom",
+                "contact.form.email": "Votre Email",
+                "contact.form.message": "Votre Message",
+                "contact.form.send": "Envoyer le Message",
+                
+                // Footer
+                "footer.hotel": "Smarts Hôtel",
+                "footer.description": "Vivez le mélange parfait de luxe et de technologie au cœur de la ville.",
+                "footer.links": "Liens Rapides",
+                "footer.services": "Services",
+                "footer.events": "Espaces Événementiels",
+                "footer.copyright": "© 2023 Smarts Hôtel. Tous droits réservés. | Conçu avec le luxe à l'esprit"
+            },
+            
+            ar: {
+                // Navigation
+                "nav.home": "الرئيسية",
+                "nav.about": "من نحن",
+                "nav.rooms": "الغرف والأجنحة",
+                "nav.services": "الخدمات",
+                "nav.gallery": "معرض الصور",
+                "nav.contact": "اتصل بنا",
+                
+                // Hero Section
+                "hero.title": "اختبر الفخامة الذكية في فندق سمارتس",
+                "hero.subtitle": "حيث تلتقي التكنولوجيا الحديثة بأناقة خالدة في قلب المدينة",
+                "hero.book": "احجز الآن",
+                "hero.explore": "استكشف الغرف",
+                
+                // About Section
+                "about.title": "عن فندق سمارتس",
+                "about.subtitle": "اكتشف القصة وراء التزامنا بالفخامة والراحة والابتكار",
+                "about.heading": "إعادة تعريف الضيافة الفاخرة",
+                "about.text1": "تأسس فندق سمارتس في عام 2010، وأصبح منارة للفخامة الحديثة في المدينة. نجمع بين التصميم الأنيق والتكنولوجيا المتطورة لخلق تجربة ضيوف لا مثيل لها.",
+                "about.text2": "تدور فلسفتنا حول الخدمة الشخصية، وميزات الغرف الذكية البديهية، والاهتمام بكل التفاصيل التي تجعل إقامتك استثنائية.",
+                "about.feature1": "أمان وخصوصية متميزة",
+                "about.feature2": "خدمة الكونسيرج على مدار الساعة",
+                "about.feature3": "اتصال عالي السرعة",
+                "about.feature4": "مرافق الرفاهية الفاخرة",
+                
+                // Rooms Section
+                "rooms.title": "الغرف والأجنحة",
+                "rooms.subtitle": "اختر من بين أماكن الإقامة المصممة بعناية، حيث يدمج كل منها الراحة مع التكنولوجيا الذكية",
+                "rooms.standard": "غرفة قياسية",
+                "rooms.deluxe": "غرفة ديلوكس",
+                "rooms.suite": "جناح تنفيذي",
+                "rooms.night": "/ ليلة",
+                "rooms.feat1": "تحكم ذكي",
+                "rooms.feat2": "سرير كينغ",
+                "rooms.feat3": "إطلالة على المدينة",
+                "rooms.feat4": "مكتب عمل",
+                "rooms.feat5": "إطلالة متميزة",
+                "rooms.feat6": "حمام سبا",
+                "rooms.feat7": "منطقة استراحة",
+                "rooms.feat8": "منزل ذكي كامل",
+                "rooms.feat9": "إطلالة بانورامية",
+                "rooms.feat10": "بار خاص",
+                "rooms.feat11": "خدمة بتلر",
+                "rooms.book": "احجز الآن",
+                
+                // Services Section
+                "services.title": "الخدمات والمرافق",
+                "services.subtitle": "اختبر مجموعة خدمات الفخامة الشاملة المصممة لراحتك ورفاهيتك",
+                "services.service1": "واي فاي عالي السرعة",
+                "services.desc1": "إنترنت بالألياف الضوئية فائق السرعة مجاناً في جميع أنحاء الفندق وفي جميع الغرف.",
+                "services.service2": "غرف ذكية",
+                "services.desc2": "غرف يتم التحكم فيها صوتياً مع أنظمة إضاءة ودرجة حرارة وترفيه مؤتمتة.",
+                "services.service3": "سبا فاخر",
+                "services.desc3": "جدد نشاطك في السبا الحائز على جوائز مع علاجات تستخدم منتجات عضوية متميزة.",
+                "services.service4": "مطعم ذواقة",
+                "services.desc4": "اختبر التميز الطهي في مطعمنا الداخلي مع طهاة حاصلين على نجوم ميشلان.",
+                "services.service5": "مركز لياقة بدنية",
+                "services.desc5": "صالة ألعاب رياضية حديثة مع مدربين شخصيين ودروس لياقة بدنية متاحة.",
+                "services.service6": "حمام سباحة لانهائي",
+                "services.desc6": "حمام سباحة لانهائي مذهل على السطح بإطلالة بانورامية على المدينة وخدمة بجانب المسبح.",
+                
+                // Gallery Section
+                "gallery.title": "معرض الصور",
+                "gallery.subtitle": "استكشف المساحات الأنيقة ومرافق الفخامة في فندق سمارتس",
+                
+                // Contact Section
+                "contact.title": "اتصل بنا",
+                "contact.subtitle": "تواصل مع فريقنا للحجوزات والاستفسارات أو الطلبات الخاصة",
+                "contact.getintouch": "ابقى على تواصل",
+                "contact.address": "العنوان",
+                "contact.phone": "الهاتف",
+                "contact.email": "البريد الإلكتروني",
+                "contact.form.name": "اسمك",
+                "contact.form.email": "بريدك الإلكتروني",
+                "contact.form.message": "رسالتك",
+                "contact.form.send": "إرسال الرسالة",
+                
+                // Footer
+                "footer.hotel": "فندق سمارتس",
+                "footer.description": "اختبر المزيج المثالي بين الفخامة والتكنولوجيا في قلب المدينة.",
+                "footer.links": "روابط سريعة",
+                "footer.services": "الخدمات",
+                "footer.events": "مساحات الفعاليات",
+                "footer.copyright": "© 2023 فندق سمارتس. جميع الحقوق محفوظة. | مصمم بالفخامة في الاعتبار"
+            }
+        };
+
+        // Language management
+        let currentLang = 'en';
+        const langButtons = document.querySelectorAll('.lang-btn');
+        
+        // Initialize translation
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Update active button
+            langButtons.forEach(btn => {
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Update text content for all translatable elements
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.dataset.key;
+                if (translations[lang] && translations[lang][key]) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
+                }
+            });
+            
+            // Update HTML direction for RTL languages
+            if (lang === 'ar') {
+                document.body.classList.add('rtl');
+                document.body.dir = 'rtl';
+                document.documentElement.lang = 'ar';
+                document.title = "فندق سمارتس - اختبر الفخامة الذكية";
+            } else if (lang === 'fr') {
+                document.body.classList.remove('rtl');
+                document.body.dir = 'ltr';
+                document.documentElement.lang = 'fr';
+                document.title = "Smarts Hôtel - Vivez le Luxe Intelligent";
+            } else {
+                document.body.classList.remove('rtl');
+                document.body.dir = 'ltr';
+                document.documentElement.lang = 'en';
+                document.title = "Smarts Hôtel - Experience Smart Luxury";
+            }
+            
+            // Save language preference to localStorage
+            localStorage.setItem('hotelLanguage', lang);
+        }
+        
+        // Language button click events
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                setLanguage(lang);
+            });
+        });
+        
+        // Check for saved language preference
+        const savedLang = localStorage.getItem('hotelLanguage');
+        if (savedLang && translations[savedLang]) {
+            setLanguage(savedLang);
+        }
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Show appropriate message based on language
+            let message = '';
+            if (currentLang === 'en') {
+                message = 'Thank you for your message! We will get back to you shortly.';
+            } else if (currentLang === 'fr') {
+                message = 'Merci pour votre message! Nous vous répondrons dans les plus brefs délais.';
+            } else if (currentLang === 'ar') {
+                message = 'شكراً على رسالتك! سنعود إليك قريباً.';
+            }
+            
+            alert(message);
+            contactForm.reset();
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Initialize header on load
+        window.addEventListener('load', () => {
+            if (window.scrollY > 100) {
+                document.getElementById('header').classList.add('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
